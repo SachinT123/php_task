@@ -1,0 +1,31 @@
+/* line 1, ../sass/out.scss */
+body {
+  font-size: 25px;
+  color: #555;
+  font-family: 'Open Sans' ,Arial;
+  line-height: 35px;
+}
+/* line 6, ../sass/out.scss */
+body #task1, body #task2 {
+  text-align: center;
+}
+/* line 7, ../sass/out.scss */
+body #task2 {
+  margin: 30px;
+}
+/* line 7, ../sass/out.scss */
+body #task2 img {
+  width: 60%;
+  height: auto;
+}
+/* line 9, ../sass/out.scss */
+body #task3 table, body #task3 td, body #task3 th {
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #000;
+  border-collapse: collapse;
+}
+/* line 10, ../sass/out.scss */
+body #task3 td, body #task3 th {
+  width: 10em;
+}

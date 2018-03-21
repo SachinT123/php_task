@@ -1,0 +1,29 @@
+/* line 1, ../sass/app.scss */
+body {
+  font-size: 18px;
+  font-family: 'Open Sans', Arial;
+}
+
+/* line 5, ../sass/app.scss */
+h2 {
+  text-align: center;
+}
+
+/* line 10, ../sass/app.scss */
+.task_form #form1 {
+  width: 40%;
+  margin: auto;
+}
+/* line 13, ../sass/app.scss */
+.task_form #form1 .fields {
+  width: 100%;
+  line-height: 20px;
+  margin-bottom: 10px;
+}
+/* line 18, ../sass/app.scss */
+.task_form #form1 .submit {
+  margin: 25px auto;
+  display: block;
+  width: 25%;
+  height: 30px;
+}

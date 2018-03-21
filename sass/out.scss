@@ -1,0 +1,12 @@
+body{
+  font-size: 25px;
+  color: #555;
+  font-family: 'Open Sans' ,Arial;
+  line-height: 35px;
+  #task1,#task2{text-align: center;}
+  #task2{margin:30px; img{width: 60%;height: auto;}}
+  #task3{
+    table,td,th{  margin-left: auto;margin-right: auto;border: 1px solid #000;border-collapse: collapse;}
+    td,th{width: 10em;}
+  }
+}
