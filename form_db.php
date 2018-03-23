@@ -27,7 +27,7 @@
 				
 				Phone No.<input type="text" name="contact" class="fields contact" pattern="[+9].[1]+[0-9].{9}" title="Include +91 as prefix followed by exactly 10 digits">
 
-				<button type="submit" name="save" class="submit save">Save</button>
+				<button type="submit" name="submit" class="submit save">Save</button>
 								
 		</form>
 		<form method="POST" class="form" action="downloadDoc.php" id="form2" style="display: none;">
@@ -66,13 +66,14 @@
 					success : function(data){
 						console.log("database access successful");
 						//window.location.href = "new.php";
+						var key = $("#form1 .contact").val();
+						$("#form2").attr('style','display:block;');
+						$("#form2 input").val(key);
 						},
 					error : function(data){console.log("error");}
 				});
 
-				var key = $("#form1 .contact").val();
-				$("#form2").attr('style','display:block;');
-				$("#form2 input").val(key);
+				
 			});
 
 			// $("#email").blur(function(e){

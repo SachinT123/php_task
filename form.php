@@ -20,7 +20,7 @@
 
 			Marks<textarea name="marks" rows="5" class="fields" placeholder="Each value (Subject|Marks) should be entered in new line"></textarea>
 
-			Phone No.<input type="text" name="contact" class="fields" pattern="[+9].[1]+[0-9].{9}" title="Include +91 as prefix followed by exactly 10 digits" value="+91">
+			Phone No.<input type="text" name="contact" class="fields" pattern="[+9].[1]+[0-9].{9}" title="Include +91 as prefix followed by exactly 10 digits">
 
 			Email Id<input type="text" name="email" class="fields">
 		
@@ -32,7 +32,7 @@
 			var f = $('form');
 			f[0].reset();
 		});
-		//$(function(){$("#form1 .fields").prop('required',true);});
+		$(function(){$("#form1 .fields").prop('required',true);});
 		function myname(f){
 			f.full_name.value = f.first_name.value + " " + f.last_name.value;
 		}
