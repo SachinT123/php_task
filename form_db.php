@@ -5,14 +5,13 @@
 <head>
 	<title>PHP task</title>
 	<link rel="stylesheet" type="text/css" href="stylesheets/app.css">
-	<script src="https://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 </head>
 <body>
-	<h2>PHP Task</h2>
-	<div class="task_form">
-		<form id="form1" method="POST" enctype="multipart/form-data">
+	<div class="task">
+		<h2>USER PROFILE INFORMATION</h2>
+		<form id="form1" class="form" method="POST" enctype="multipart/form-data">
+				<div class="preview"><img id="preview_image" src="#" style="display: none;"></div>
 
 				First Name<input type="text" name="first_name" class="fields" pattern="[a-zA-Z]+">
 			
@@ -20,22 +19,38 @@
 			
 				Full Name<input type="text" name="full_name" class="fields" style="text-transform: uppercase;" readonly>
 				
-				Upload Image<input type="file" accept=".jpg,.jpeg,.png" name="image" class="fields" required>
+				Upload Image<input type="file" id="imageUpload" accept=".jpg,.jpeg,.png" name="image" class="fields" onchange="preview(this)">
 
-				Marks<textarea name="marks" class="fields" placeholder="Each value (Subject|Marks) should be entered in new line"></textarea>
-
-				Phone No.<input type="text" name="contact" class="fields" pattern="[+9].[1]+[0-9].{9}" title="Include +91 as prefix followed by exactly 10 digits">
+				Marks<textarea name="marks" rows="5" class="fields" placeholder="Each value (Subject|Marks) should be entered in new line"></textarea>
 
 				Email Id<input type="text" name="email" id="email" class="fields">
 				
-				<button type="submit" name="save" class="submit">Save</button>
+				Phone No.<input type="text" name="contact" class="fields contact" pattern="[+9].[1]+[0-9].{9}" title="Include +91 as prefix followed by exactly 10 digits">
+
+				<button type="submit" name="save" class="submit save">Save</button>
+								
+		</form>
+		<form method="POST" class="form" action="downloadDoc.php" id="form2" style="display: none;">
+			<input type="text" name="contact" style="display: none;">
+			<button type="submit" class="submit download">Download</button>
 		</form>
 	</div>
-	<script type="text/javascript">
+	<script>
 
 		function myname(f){	f.full_name.value = f.first_name.value + " " + f.last_name.value;	}
 		
 		$(function(){$("#form1 .fields").prop('required',true);});
+
+		function preview(i){
+				if ( i.files && i.files[0] ) {
+					var reader = new FileReader();
+					reader.onload = function(e){
+						$("#preview_image").attr('src',e.target.result);
+						$("#preview_image").attr('style','width:300px;height:300px;display:block;object-fit:contain;border:2px solid cyan;margin:2em auto;');
+					}
+					reader.readAsDataURL(i.files[0]);
+					}
+			}
 
 		$(function(){
 			$('#form1').on('submit',function(e){
@@ -43,44 +58,51 @@
 				var data = new FormData(this);
 				$.ajax({
 					type : 'POST',
-					url : 'db_conn.php',
+					url : 'db_insert.php',
 					data : data,
-					contentType : false,
 					cache : false,
+					contentType : false,
 					processData : false,
-					success : function(data){console.log("database access successful");},
-					error : function(data){console.log("failure");}
+					success : function(data){
+						console.log("database access successful");
+						//window.location.href = "new.php";
+						},
+					error : function(data){console.log("error");}
 				});
+
+				var key = $("#form1 .contact").val();
+				$("#form2").attr('style','display:block;');
+				$("#form2 input").val(key);
 			});
 
-			$("#email").blur(function(){
-				if($(this).val()!=""){
-					var access = '4cdf1ed54638a84a039dd6e42f11dc7a';
-					var emailId = $("#email").val();
-					$.ajax({
-						type : "POST",
-						url : "http://apilayer.net/api/check?access_key="+access+"&email="+emailId,
-						dataType : 'jsonp',
-						success : function(json){
-									console.log(json.format_valid);
-									console.log(json.smtp_check);
-									var arr = ["gmail","hotmail","rediff","yahoo"];
-									var domain = arr.indexOf(json.domain.slice(0,json.domain.indexOf(".")));
+			// $("#email").blur(function(e){
+			// 	if($(this).val()!=""){
+			// 		var access = '4cdf1ed54638a84a039dd6e42f11dc7a';
+			// 		var emailId = $("#email").val();
+			// 		$.ajax({
+			// 			type : "POST",
+			// 			url : "http://apilayer.net/api/check?access_key="+access+"&email="+emailId,
+			// 			dataType : 'jsonp',
+			// 			success : function(json){
+			// 						console.log(json.format_valid);
+			// 						console.log(json.smtp_check);
+			// 						var arr = ["gmail","hotmail","rediff","yahoo"];
+			// 						var domain = arr.indexOf(json.domain.slice(0,json.domain.indexOf(".")));
 
-									if(json.format_valid && json.smtp_check){if(domain != -1){
-											console.log("public id");
-											$("#email").val("");
-										}
-									}
-									else
-											$("#email").val("");
-									},
-						error : function(data){console.log("could not connect to API");}
-					});
-				}
-				else
-					console.log("empty field");
-			});
+			// 						if(json.format_valid && json.smtp_check){if(domain != -1){
+			// 								console.log("public id");
+			// 								$("#email").val("");
+			// 							}
+			// 						}
+			// 						else
+			// 								$("#email").val("");
+			// 						},
+			// 			error : function(data){console.log("could not connect to API");}
+			// 		});
+			// 	}
+			// 	else
+			// 		console.log("empty field");
+			// });
 		});
 		
 	</script>
