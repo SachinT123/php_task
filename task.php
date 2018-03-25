@@ -5,11 +5,13 @@
 	<link rel="stylesheet" type="text/css" href="stylesheets/out.css">
 </head>
 <body>
-
-	<?php		$fullname = strtoupper($_POST["full_name"]);
-				echo "<h2>Welcome $fullname</h2>";			?>
+	<div id="task1">
+		<?php		$fullname = strtoupper($_POST["full_name"]);
+				echo "<h2>Welcome $fullname</h2>";		?>
+	</div>
 
 	<!--for image upload-->
+	<div id="task2">
 	<?php		
 		$errors = array();
 		$file_name = $_FILES['image']['name'];
@@ -21,21 +23,27 @@
 			move_uploaded_file($file_temp, $target_file);	
 		echo "<img src='$target_file'><br>$fullname";
 	?>
-
+	</div>
+	
 	<!--for marksheet display-->
+	<div id="task3">
 	<?php		
-		if(!is_null($_POST['marks']) == true){
-			$marks = explode("\n", $_POST["marks"]);
-			foreach ($marks as &$value)	{
-				$value = explode("|", $value);
+		if(!is_null($_POST['subject_1']) == true){
+			//$marks = explode("\n", ltrim(rtrim($_POST["marks"])));
+			$sub = count($_POST)-6;
+			$marks = array();
+			for($i=0; $i < $sub; $i++)
+			{
+				$subVal = "subject_".($i+1);
+				$marks[$i] = explode("|", $_POST["$subVal"]);
 			}
-			$subjects = count($marks);
-			echo "<table><tr><th colspan='$subjects'>MARKSHEET</th></tr><tr>";
-			for ($i=0; $i < $subjects; $i++) { 
+	
+			echo "<table><tr><th colspan='$sub'>MARKSHEET</th></tr><tr>";
+			for ($i=0; $i < $sub; $i++) { 
 				echo "<th>".strtoupper($marks[$i][0])."</th>";
 			}
 			echo "</tr><tr>";
-			for ($i=0; $i < $subjects; $i++) { 
+			for ($i=0; $i < $sub; $i++) { 
 				echo "<td>".$marks[$i][1]."</td>";
 			}
 		}
@@ -43,8 +51,10 @@
 			echo "<table><tr><th>MARKSHEET</th></tr><tr><td>No data entered</td>";
 		echo "</tr></table><br>";
 	?>
-		 
+	</div>
+
 	<!--for contact number-->
+	<div id="task4">
 	<?php	
 		echo "Contact : ";
 		if(!is_null($_POST['contact']))
@@ -52,8 +62,10 @@
 		else echo "No data entered";
 		echo "<br>";
 	?>
+	</div>
 
 	<!--for email validation-->
+	<div id="task5">
 	<?php
 		$access_key = '4cdf1ed54638a84a039dd6e42f11dc7a';
 		$email_address = $_POST["email"];
@@ -75,5 +87,7 @@
 		else
 		echo "Invalid Syntax )";
 	?>
+	</div>
+
 </body>
 </html>

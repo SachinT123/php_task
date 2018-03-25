@@ -21,18 +21,21 @@
 				
 				Upload Image<input type="file" id="imageUpload" accept=".jpg,.jpeg,.png" name="image" class="fields" onchange="preview(this)">
 
-				Marks<textarea name="marks" rows="5" class="fields" placeholder="Each value (Subject|Marks) should be entered in new line"></textarea>
+				Marks
+				<div id="subjects">
+				</div>
+				<button type="button" id="buttonAddSub" class="button">Add Subject</button>
 
 				Email Id<input type="text" name="email" id="email" class="fields">
 				
-				Phone No.<input type="text" name="contact" class="fields contact" pattern="[+9].[1]+[0-9].{9}" title="Include +91 as prefix followed by exactly 10 digits">
+				Phone No.<input type="text" name="contact" class="fields contact" pattern="^(\+91)[1-9]\d{9}$" title="Include +91 as prefix followed by exactly 10 digits">
 
-				<button type="submit" name="submit" class="submit save">Save</button>
-								
+				<button type="submit" name="submit" class="submit button">Save</button>
+
 		</form>
 		<form method="POST" class="form" action="downloadDoc.php" id="form2" style="display: none;">
 			<input type="text" name="contact" style="display: none;">
-			<button type="submit" class="submit download">Download</button>
+			<button type="submit" class="submit button">Download</button>
 		</form>
 	</div>
 	<script>
@@ -76,34 +79,54 @@
 				
 			});
 
-			// $("#email").blur(function(e){
-			// 	if($(this).val()!=""){
-			// 		var access = '4cdf1ed54638a84a039dd6e42f11dc7a';
-			// 		var emailId = $("#email").val();
-			// 		$.ajax({
-			// 			type : "POST",
-			// 			url : "http://apilayer.net/api/check?access_key="+access+"&email="+emailId,
-			// 			dataType : 'jsonp',
-			// 			success : function(json){
-			// 						console.log(json.format_valid);
-			// 						console.log(json.smtp_check);
-			// 						var arr = ["gmail","hotmail","rediff","yahoo"];
-			// 						var domain = arr.indexOf(json.domain.slice(0,json.domain.indexOf(".")));
+			$("#email").blur(function(e){
+				if($(this).val()!=""){
+					var access = '4cdf1ed54638a84a039dd6e42f11dc7a';
+					var emailId = $("#email").val();
+					$.ajax({
+						type : "POST",
+						url : "http://apilayer.net/api/check?access_key="+access+"&email="+emailId,
+						dataType : 'jsonp',
+						success : function(json){
+									console.log(json.format_valid);
+									console.log(json.smtp_check);
+									var arr = ["gmail","hotmail","rediff","yahoo"];
+									var domain = arr.indexOf(json.domain.slice(0,json.domain.indexOf(".")));
 
-			// 						if(json.format_valid && json.smtp_check){if(domain != -1){
-			// 								console.log("public id");
-			// 								$("#email").val("");
-			// 							}
-			// 						}
-			// 						else
-			// 								$("#email").val("");
-			// 						},
-			// 			error : function(data){console.log("could not connect to API");}
-			// 		});
-			// 	}
-			// 	else
-			// 		console.log("empty field");
-			// });
+									if(json.format_valid && json.smtp_check){if(domain != -1){
+											console.log("public id");
+											$("#email").val("");
+										}
+									}
+									else
+											$("#email").val("");
+									},
+						error : function(data){console.log("could not connect to API");}
+					});
+				}
+				else
+					console.log("empty field");
+			});
+		});
+
+		$(function(){
+			var subDiv = $('#subjects');
+			var i = $('#subjects p').length + 1 ;
+			$("#buttonAddSub").on("click",function(e){
+				e.preventDefault();
+				$('<p><input type="text" class="fields subjectField" name="subject_' + i + '" placeholder="Subject_name | Marks" required> <button type="button" class="button" id="remSub">Remove</button></p>').appendTo(subDiv);
+				i++;
+				return false;
+			});
+
+			$(subDiv).on("click","#remSub",function(e){
+				e.preventDefault();
+				if(i>1){
+					$(this).parent().remove();
+					i--;
+				}
+				return false;
+			});
 		});
 		
 	</script>

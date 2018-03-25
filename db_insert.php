@@ -11,8 +11,16 @@
 	$target_file = "uploads/".basename($file_name);
 	if(file_exists($target_file))
 		$errors = "file already exits!!!";
+	
+	$sub = count($_POST)-5;
+	$marks = "";
+	for($i=0; $i < $sub; $i++)
+		{
+			$subVal = "subject_".($i+1);
+			$marks .= $_POST[$subVal]."\n";
+		}
 
-	$sql = "insert into task values ('" . strtoupper($_POST['first_name']) . "','" . strtoupper($_POST['last_name']). "','" . $target_file . "','" . strtoupper($_POST['marks']) . "','" . $_POST['contact'] . "','" . $_POST['email'] . "')";
+	$sql = "insert into task values ('" . strtoupper($_POST['first_name']) . "','" . strtoupper($_POST['last_name']). "','" . $target_file . "','" . strtoupper($marks) . "','" . $_POST['contact'] . "','" . $_POST['email'] . "')";
  	
  	$result = mysqli_query($conn,$sql);
 	if($result && is_null($errors))

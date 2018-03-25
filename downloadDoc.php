@@ -12,10 +12,11 @@
  	
  	$row = mysqli_fetch_array($query,MYSQLI_ASSOC);
 	
- 	$marks = explode("\n", $row['marks']);
+ 	$marks = explode("\n", ltrim(rtrim($row['marks'])));
  	foreach ($marks as &$val) {
  		$val = explode("|", rtrim(ltrim($val)));
  	}
+ 	
 
 	require_once __DIR__.'/vendor/autoload.php';
 

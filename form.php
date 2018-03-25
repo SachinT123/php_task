@@ -9,7 +9,7 @@
 <body>
 	<div class="task">
 	<h2>USER PROFILE INFORMATION</h2>
-	<form method="POST" action="task.php" class="form" enctype="multipart/form-data">
+	<form method="POST" action="task.php" id="form1" class="form" enctype="multipart/form-data">
 			First Name<input type="text" name="first_name" class="fields" pattern="[a-zA-Z]+">
 		
 			Last Name<input type="text" name="last_name" class="fields" pattern="[a-zA-Z]+" onblur="myname(this.form)">
@@ -18,13 +18,17 @@
 			
 			Upload Image<input type="file" accept=".jpg,.jpeg,.png" name="image" class="fields" >
 
-			Marks<textarea name="marks" rows="5" class="fields" placeholder="Each value (Subject|Marks) should be entered in new line"></textarea>
+			Marks
+			<div id="subjects">
+			</div>
 
-			Phone No.<input type="text" name="contact" class="fields" pattern="[+9].[1]+[0-9].{9}" title="Include +91 as prefix followed by exactly 10 digits">
+			<button type="button" id="buttonAddSub" class="button">Add Subject</button>
+
+			Phone No.<input type="text" name="contact" class="fields" pattern="^(\+91)[1-9]\d{9}$" title="Include +91 as prefix followed by exactly 10 digits">
 
 			Email Id<input type="text" name="email" class="fields">
 		
-			<button type="submit" name="submit" class="submit">Submit</button>
+			<button type="submit" name="submit" class="button submit">Submit</button>
 	</form>
 	</div>
 	<script>
@@ -36,6 +40,26 @@
 		function myname(f){
 			f.full_name.value = f.first_name.value + " " + f.last_name.value;
 		}
+		$(function(){
+			var subDiv = $('#subjects');
+			var i = $('#subjects p').length + 1;
+			$("#buttonAddSub").on("click",function(e){
+				e.preventDefault();
+				$('<p><input type="text" class="fields subjectField" name="subject_' + i + '" placeholder="Subject_name | Marks" required> <button type="button" class="button" id="remSub">Remove</button></p>').appendTo(subDiv);
+				i++;
+				return false;
+			});
+
+			$(subDiv).on("click","#remSub",function(e){
+				e.preventDefault();
+				if(i>1){
+					$(this).parent().remove();
+					i--;
+				}
+				return false;
+			});
+		});
+
 	</script>
 </body>
 </html>
