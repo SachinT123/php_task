@@ -6,9 +6,9 @@ body{
   .title{text-align: center;font-weight: 700;}
   padding: 1% 5% 5%;
   width: 50%;
+  box-shadow: 10px 10px 20px 0px rgba(0,0,0,1), 0 0px 10px 0 rgba(0, 0, 0, 0.5);
   background-color: #1e1e1e;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 5% auto;
   color:#fff;
   legend{color:inherit;}
   .data{
@@ -19,7 +19,7 @@ body{
           width: -webkit-fill-available; 
           font-size:17px;
           border: transparent 2px solid;
-          border-radius:12px;
+          &:focus{outline: 2px ridge #0ff; outline-offset: 1px;}
           &::placeholder{font-size: 15px; color:#555;}
       }
       .error_msg{color: #0ff;font-size: 15px;display: none;}
@@ -31,11 +31,11 @@ body{
     line-height: 16px;
     min-width: 50px;
     padding: 15px 40px;
-    color: #fff;
     text-shadow: 0 1px rgba(0,0,0,0.1);
     border: 1px solid #3079ed;
     border-radius: 10px;
   }
+  #submit{button{color:#fff;background:#00f;}}
 #subjects{
     p{margin: 10px 0;}
     .remSub{

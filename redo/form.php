@@ -18,7 +18,7 @@
 			
 			Upload Image<input type="file" accept=".jpg,.jpeg,.png" name="image" class="fields" >
 
-			Marks<textarea name="marks" class="fields marks" onblur="test();"></textarea>
+			Marks<textarea name="marks" class="fields marks"></textarea>
 
 			Phone No.<input type="text" name="contact" class="fields" pattern="^(\+91)[1-9]\d{9}$" title="Include +91 as prefix followed by exactly 10 digits">
 
@@ -51,7 +51,7 @@
 			// 	}
 			// 	return false;
 			// });
-			
+
 		});
 
 	</script>

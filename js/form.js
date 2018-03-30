@@ -1,5 +1,7 @@
+//concatenate firstname and lastname
 function myname(f){	f.full_name.value = f.first_name.value + " " + f.last_name.value;	}
-		
+
+//enable required property and disable autocomplete property
 $(function(){$(".info").prop('required',true).prop('autocomplete','off');});
 
 //error message display/hide
@@ -26,12 +28,12 @@ $(function(){
 			processData : false,
 			success : function(data){
 				console.log("database access successful");
-				window.location.href = "details_form.php";
+				window.location.href = "form2.php";
 				},				
 			error : function(data){console.log("error");}
 		});
 	});
-});
+
 
 	//for email syntax check
 	$('.email').on('blur',function(){
@@ -69,6 +71,6 @@ $(function(){
 		else
 			console.log("empty field");
 	});
-
+});
 	
 

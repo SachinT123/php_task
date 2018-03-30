@@ -50,9 +50,18 @@
 		// else
 		// 	echo "<table><tr><th>MARKSHEET</th></tr><tr><td>No data entered</td>";
 		// echo "</tr></table><br>";
-
-		$marks = preg_split("/^[a-z0-9][|]\d{1,3}[\r]$/i", $_POST['marks'],-1,PREG_SPLIT_NO_EMPTY);
-		print_r($marks);
+    
+    $a = explode("\n" , $_POST['marks']);
+    $c = count($a);
+    for ($i=0; $i < $c; $i++) { 
+        if(preg_match("/(^[a-z0-9]+[\|]\d{1,3})/i",$a[$i]))
+            $a[$i]=explode("|",$a[$i]);
+        else
+        	unset($a[$i]);
+    }
+    print_r($a);
+    $p = array_values($a);
+    print_r($p);
 	?>
 	</div>
 

@@ -1,6 +1,7 @@
+//to assign 'required' to each input field
 $(function(){$(".info").prop('required',true).prop('autocomplete','off');});
 
-//error message display/hide 
+//display error message on invalid or no input
 $('.info').blur(function() {
 	if($(this).val().trim() == '' ){
         $(this).siblings('span').css('display','block');
@@ -10,7 +11,7 @@ $('.info').blur(function() {
         $(this).siblings('span').css('display','none');
 	});
 
-//image preview
+//display preview of image on upload
 function preview(i){
 		if ( i.files && i.files[0] ) {
 			var reader = new FileReader();
@@ -22,29 +23,8 @@ function preview(i){
 		}
 	}
 
-
+//save data in database through ajax and then redirect to downloadFile.php which downloads data in .doc format 
 $(function(){
-	var subDiv = $('#subjects');
-	var i = $('#subjects p').length + 1 ;
-	//add input field on button click
-	$("#buttonAddSub").on("click",function(e){
-		e.preventDefault();
-		$('<p><input type="text" class="info subjectField" name="subject_' + i + '" pattern="/(^[a-z0-9]+[|](\d{1,2}|100)$)/i" placeholder="Subject_name | Marks" required autocomplete="off">\n<i class="remSub">X</i></p>').appendTo(subDiv);
-		i++;
-		return false;
-	});
-
-	//remove input field on button click
-	$(subDiv).on("click",".remSub",function(e){
-		e.preventDefault();
-		if(i>2){
-			$(this).parent().remove();
-			i--;
-		}
-		return false;
-	});
-
-	//on form submit, save data and redirect to 'downloadFile.php' to download 
 	$("#form2").on('submit',function(e){
 		e.preventDefault();
 		var data = new FormData(this);
@@ -56,7 +36,7 @@ $(function(){
 			contentType : false,
 			processData : false,
 			success : function(data){
-				console.log("User details saved in Database");
+				//console.log("User details saved in Database");
 				window.location.href = "downloadFile.php";
 			}
 		});
