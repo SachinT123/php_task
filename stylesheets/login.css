@@ -1,0 +1,88 @@
+/* line 1, ../sass/login.scss */
+body {
+  font-size: 20px;
+  font-family: 'Open Sans', Arial;
+}
+
+/* line 5, ../sass/login.scss */
+.info_container {
+  padding: 1% 5% 5%;
+  width: 50%;
+  background-color: #1e1e1e;
+  margin-left: auto;
+  margin-right: auto;
+  color: #fff;
+}
+/* line 6, ../sass/login.scss */
+.info_container .title {
+  text-align: center;
+  font-weight: 700;
+}
+/* line 13, ../sass/login.scss */
+.info_container legend {
+  color: inherit;
+}
+/* line 14, ../sass/login.scss */
+.info_container .data {
+  line-height: 36px;
+  border: 0;
+}
+/* line 17, ../sass/login.scss */
+.info_container .data .info {
+  padding: 5px 20px;
+  width: -webkit-fill-available;
+  font-size: 17px;
+  border: transparent 2px solid;
+  border-radius: 12px;
+}
+/* line 23, ../sass/login.scss */
+.info_container .data .info::placeholder {
+  font-size: 15px;
+  color: #555;
+}
+/* line 25, ../sass/login.scss */
+.info_container .data .error_msg {
+  color: #0ff;
+  font-size: 15px;
+  display: none;
+}
+
+/* line 28, ../sass/login.scss */
+#submit {
+  text-align: center;
+}
+
+/* line 29, ../sass/login.scss */
+.button {
+  font-weight: 700;
+  line-height: 16px;
+  min-width: 50px;
+  padding: 15px 40px;
+  color: #fff;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #3079ed;
+  border-radius: 10px;
+}
+
+/* line 40, ../sass/login.scss */
+#subjects p {
+  margin: 10px 0;
+}
+/* line 41, ../sass/login.scss */
+#subjects .remSub {
+  font-size: 16px;
+  color: #00f;
+  font-weight: 700;
+  position: absolute;
+  right: 27%;
+  transform: translateY(-95%);
+  padding: 0 12px;
+  cursor: pointer;
+}
+
+/* line 52, ../sass/login.scss */
+#buttonAddSub {
+  display: block;
+  margin: 10px 0;
+  padding: 8px 20px;
+}

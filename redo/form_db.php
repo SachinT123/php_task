@@ -1,10 +1,8 @@
-
-
 <!DOCTYPE html>
 <html>
 <head>
-	<title>PHP task</title>
-	<link rel="stylesheet" type="text/css" href="stylesheets/app.css">
+	<title>User Info</title>
+	<link rel="stylesheet" type="text/css" href="../stylesheets/app.css">
 	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -23,6 +21,7 @@
 
 				Marks
 				<div id="subjects">
+				<p><input type="text" class="fields subjectField" name="subject_1" placeholder="Subject_name | Marks" required> <button type="button" class="button" id="remSub">Remove</button></p>
 				</div>
 				<button type="button" id="buttonAddSub" class="button">Add Subject</button>
 
@@ -68,45 +67,46 @@
 					processData : false,
 					success : function(data){
 						console.log("database access successful");
-						//window.location.href = "new.php";
 						var key = $("#form1 .contact").val();
 						$("#form2").attr('style','display:block;');
 						$("#form2 input").val(key);
 						},
-					error : function(data){console.log("error");}
+					error : function(data){
+						console.log("error");
+					}
 				});
 
 				
 			});
 
-			$("#email").blur(function(e){
-				if($(this).val()!=""){
-					var access = '4cdf1ed54638a84a039dd6e42f11dc7a';
-					var emailId = $("#email").val();
-					$.ajax({
-						type : "POST",
-						url : "http://apilayer.net/api/check?access_key="+access+"&email="+emailId,
-						dataType : 'jsonp',
-						success : function(json){
-									console.log(json.format_valid);
-									console.log(json.smtp_check);
-									var arr = ["gmail","hotmail","rediff","yahoo"];
-									var domain = arr.indexOf(json.domain.slice(0,json.domain.indexOf(".")));
+			// $("#email").blur(function(e){
+			// 	if($(this).val()!=""){
+			// 		var access = '4cdf1ed54638a84a039dd6e42f11dc7a';
+			// 		var emailId = $("#email").val();
+			// 		$.ajax({
+			// 			type : "POST",
+			// 			url : "http://apilayer.net/api/check?access_key="+access+"&email="+emailId,
+			// 			dataType : 'jsonp',
+			// 			success : function(json){
+			// 						console.log(json.format_valid);
+			// 						console.log(json.smtp_check);
+			// 						var arr = ["gmail","hotmail","rediff","yahoo"];
+			// 						var domain = arr.indexOf(json.domain.slice(0,json.domain.indexOf(".")));
 
-									if(json.format_valid && json.smtp_check){if(domain != -1){
-											console.log("public id");
-											$("#email").val("");
-										}
-									}
-									else
-											$("#email").val("");
-									},
-						error : function(data){console.log("could not connect to API");}
-					});
-				}
-				else
-					console.log("empty field");
-			});
+			// 						if(json.format_valid && json.smtp_check){if(domain != -1){
+			// 								console.log("public id");
+			// 								$("#email").val("");
+			// 							}
+			// 						}
+			// 						else
+			// 								$("#email").val("");
+			// 						},
+			// 			error : function(data){console.log("could not connect to API");}
+			// 		});
+			// 	}
+			// 	else
+			// 		console.log("empty field");
+			// });
 		});
 
 		$(function(){
@@ -121,7 +121,7 @@
 
 			$(subDiv).on("click","#remSub",function(e){
 				e.preventDefault();
-				if(i>1){
+				if(i>2){
 					$(this).parent().remove();
 					i--;
 				}
