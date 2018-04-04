@@ -7,28 +7,44 @@
 	if($conn->connect_errno)
 		die("Failed connection : " . $conn->connect_error);
 
+	$errors = array();
+	$img_exists = 0;
 	$file_name = $_FILES['image']['name'];
 	$file_temp = $_FILES['image']['tmp_name'];
 	$target_file = "../uploads/".basename($file_name);
 	if(file_exists($target_file))
-		$errors = "file already exits!!!";
+		$img_exists = 1;
 
-	$marks = explode("\n" , $_POST['marks']);
+	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+  	// Valid file extensions
+ 	$extensions_arr = array("jpg","jpeg","png","gif");
+ 	if(!in_array($imageFileType, $extensions_arr))
+ 		array_push($errors, "inv_ext");
+
+	$marks = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $_POST['marks']);
+	$marks = explode("\n" , trim($marks));
     $count = count($marks);
     $temp = "";
     for ($i=0; $i < $count; $i++) { 
-    	$marks[$i] = ltrim(rtrim($marks[$i]));
-        if(preg_match("/(^[a-z0-9]+[|](\d{1,2}|100)$)/i",$marks[$i]))
+    	$marks[$i] = trim($marks[$i]);
+        if(preg_match("/(^[a-z\s]+[|](\d{1,2}|100)$)/i",$marks[$i]))
         	$temp .= $marks[$i]."\n";
+        else{
+        	array_push($errors,"inv_for");
+        	break;
+        }
     }
+    if(!preg_match("/^(\+91)[1-9]\d{9}$/", $_POST['contact']))
+    	array_push($errors,"inv_cn");
     $marks = $temp;
+    if(empty($errors)){
+		$sql = "update userinfo set image = '" . $target_file . "', marks = '" . strtoupper(trim($marks)) . "', contact = '" . $_POST['contact'] . "' where email = '" . $_SESSION['user_name'] . "'";
+		$query = mysqli_query($conn,$sql);
 
-	$sql = "update userinfo set image = '" . $target_file . "', marks = '" . strtoupper(rtrim($marks)) . "', contact = '" . $_POST['contact'] . "' where email = '" . $_SESSION['user_name'] . "'";
-	$query = mysqli_query($conn,$sql);
-
-	if($query && is_null($errors))
-		move_uploaded_file($file_temp, $target_file);
-	
+		if($query && !$img_exists)
+			move_uploaded_file($file_temp, $target_file);
+	}
+	echo implode(" ", $errors);
 	mysqli_close($conn);
 	return $query;		 
  ?>

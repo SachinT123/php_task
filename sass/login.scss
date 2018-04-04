@@ -25,7 +25,11 @@ body{
       .error_msg{color: #0ff;font-size: 15px;display: none;}
     }
   }
-#submit{text-align: center;}
+#submit{
+    text-align: center;
+    a{font-size: 14px; color:#0ff; text-decoration:none;  }
+    button{color:#fff;background:#00f;}
+  }
 .button{
     font-weight: 700;
     line-height: 16px;
@@ -35,7 +39,7 @@ body{
     border: 1px solid #3079ed;
     border-radius: 10px;
   }
-  #submit{button{color:#fff;background:#00f;}}
+
 #subjects{
     p{margin: 10px 0;}
     .remSub{

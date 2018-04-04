@@ -54,7 +54,7 @@
 			</fieldset>
 		</form>
 	</div>
-	<script type="text/javascript" src="./js/form2.js">
+	<script type="text/javascript" src="./js/DetailForm.js">
 		
 	</script>
 

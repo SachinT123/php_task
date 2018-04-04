@@ -20,9 +20,7 @@
 </head>
 <body>
 	<div class="info_container">
-		<!-- image preview -->
-		<div class="preview"><img id="preview_image" src="#" style="display: none;"></div>
-		
+
 		<!-- heading -->
 		<h1 class="title">USER INFORMATION</h1>
 		
@@ -44,10 +42,12 @@
 				<input type="file" id="imageUpload" accept=".jpg,.jpeg,.png" name="image" class="info" onchange="preview(this)">
 				<span class="error_msg"></span>
 			</fieldset>
+			<!-- image preview -->
+			<div class="preview"><img id="preview_image" src="#" style="display: none;"></div>
 			
 			<fieldset class="data" id="marks">
 				<legend>Marks</legend>
-				<textarea name="marks" class="info marks" placeholder="Enter values in 'SUBJECT|MARKS' format. Any invalid data will not be saved" rows=5 style="resize:none;font-family: inherit;"></textarea>
+				<textarea name="marks" class="info marks" placeholder="Enter values in 'SUBJECT|MARKS' format. Any invalid data will not be saved" rows=5 style="resize:none;font-family: inherit;" onblur="checkMarksFormat(this.value)"></textarea>
 				<span class="error_msg"></span>
 			</fieldset>
 			
@@ -63,7 +63,7 @@
 		</form>
 	</div>
 	
-	<script type="text/javascript" src="../js/form2.js"></script>
+	<script type="text/javascript" src="../js/f2.js"></script>
 
 </body>
 </html>

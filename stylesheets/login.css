@@ -55,8 +55,19 @@ body {
 #submit {
   text-align: center;
 }
+/* line 30, ../sass/login.scss */
+#submit a {
+  font-size: 14px;
+  color: #0ff;
+  text-decoration: none;
+}
+/* line 31, ../sass/login.scss */
+#submit button {
+  color: #fff;
+  background: #00f;
+}
 
-/* line 29, ../sass/login.scss */
+/* line 33, ../sass/login.scss */
 .button {
   font-weight: 700;
   line-height: 16px;
@@ -67,17 +78,11 @@ body {
   border-radius: 10px;
 }
 
-/* line 38, ../sass/login.scss */
-#submit button {
-  color: #fff;
-  background: #00f;
-}
-
-/* line 40, ../sass/login.scss */
+/* line 44, ../sass/login.scss */
 #subjects p {
   margin: 10px 0;
 }
-/* line 41, ../sass/login.scss */
+/* line 45, ../sass/login.scss */
 #subjects .remSub {
   font-size: 16px;
   color: #00f;
@@ -89,7 +94,7 @@ body {
   cursor: pointer;
 }
 
-/* line 52, ../sass/login.scss */
+/* line 56, ../sass/login.scss */
 #buttonAddSub {
   display: block;
   margin: 10px 0;

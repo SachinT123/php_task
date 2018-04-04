@@ -43,7 +43,7 @@
  	//add horizontal line
  	$section->addLine(array('weight' => 3,'width'=>400,'alignment'=>'center'));
 
- 	$section->addImage($row['image'], array('width' => 300, 'alignment' => 'center')//add image
+ 	$section->addImage($row['image'], array('width' => 300, 'height' => 200, 'alignment' => 'center')//add image
  	 			);
  	$section->addTextBreak(3);//line break
  	
