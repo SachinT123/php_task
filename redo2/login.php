@@ -25,7 +25,7 @@
 	
 			<fieldset class="data" id="submit">
 				<button type="submit" name="submit" class="button">SUBMIT</button>
-				<br><a href="register_form.php">Create a new Account</a>
+				<br><a href="index.php">Create a new Account</a>
 			</fieldset>	
 		</form>
 	</div>

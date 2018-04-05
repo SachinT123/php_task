@@ -1,6 +1,6 @@
 //to assign 'required' to each input field
 $(function(){$(".info").prop('required',true).prop('autocomplete','off');});
-
+$('#imageUpload').prop('autofocus','true');
 //display error message on invalid or no input
 $('.info').blur(function() {
 	if($(this).val().trim() == '' ){
@@ -15,14 +15,25 @@ $('.info').blur(function() {
 
 //display preview of image on upload
 function preview(i){
-
 		if ( i.files && i.files[0] ) {
-			var reader = new FileReader();
-			reader.onload = function(e){
-				$("#preview_image").attr('src',e.target.result);
-				$("#preview_image").attr('style','width:300px;height:300px;display:block;border-radius:5px;object-fit:contain;margin:auto;');
+			var uploadedFileType = i.value.slice(i.value.lastIndexOf(".")).toLowerCase();
+			console.log(uploadedFileType);
+			var arr = [".png",".jpeg",".jpg"];
+			console.log(arr.indexOf(uploadedFileType));
+			if(arr.indexOf(uploadedFileType) >= 0){
+				var reader = new FileReader();
+				reader.onload = function(e){
+					$("#preview_image").attr('src',e.target.result);
+					$("#preview_image").attr('style','width:300px;height:300px;display:block;border-radius:5px;object-fit:contain;margin:auto;');
+				}
+				reader.readAsDataURL(i.files[0]);
 			}
-			reader.readAsDataURL(i.files[0]);
+			else
+			{
+				$('#imageUpload').trigger("blur");
+				$('#preview_image').css('display','none');
+				$('#image span').css('display','block').html('File Format invalid');
+			}
 		}
 		
 	}
@@ -59,7 +70,7 @@ $(function(){
 			success : function(data){
 				console.log(data);
 				if(data.trim() == ""){
-					alert("On submission, browser will be redirected to 'Login' page and form data will be downloaded");
+					alert("On submission, browser will be redirected to 'Login' page.\n Form data will be downloaded only if pop-ups are unblocked");
 					window.open("downloadFile.php");
 					window.location.href = "login.php";
 				}
