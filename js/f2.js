@@ -1,6 +1,8 @@
 //to assign 'required' to each input field
 $(function(){$(".info").prop('required',true).prop('autocomplete','off');});
+
 $('#imageUpload').prop('autofocus','true');
+
 //display error message on invalid or no input
 $('.info').blur(function() {
 	if($(this).val().trim() == '' ){
@@ -17,9 +19,7 @@ $('.info').blur(function() {
 function preview(i){
 		if ( i.files && i.files[0] ) {
 			var uploadedFileType = i.value.slice(i.value.lastIndexOf(".")).toLowerCase();
-			console.log(uploadedFileType);
 			var arr = [".png",".jpeg",".jpg"];
-			console.log(arr.indexOf(uploadedFileType));
 			if(arr.indexOf(uploadedFileType) >= 0){
 				var reader = new FileReader();
 				reader.onload = function(e){
@@ -68,28 +68,27 @@ $(function(){
 			contentType : false,
 			processData : false,
 			success : function(data){
-				console.log(data);
-				if(data.trim() == ""){
-					alert("On submission, browser will be redirected to 'Login' page.\n Form data will be downloaded only if pop-ups are unblocked");
-					window.open("downloadFile.php");
-					window.location.href = "login.php";
-				}
-				else
-				{
-					if(data.indexOf("inv_ext") != -1){
-						$("#imageUpload").val("");
-						$('#preview_image').css('display','none');
-						$("#imageUpload").siblings("span").css('display','block').html("File format invalid");
+						if(data.trim() == ""){
+							alert("On submission, browser will be redirected to 'Login' page.\n Form data will be downloaded only if pop-ups are unblocked");
+							window.open("downloadFile.php");
+							window.location.href = "login.php";
+						}
+						else
+						{
+							if(data.indexOf("inv_ext") != -1){
+								$("#imageUpload").val("");
+								$('#preview_image').css('display','none');
+								$("#imageUpload").siblings("span").css('display','block').html("File format invalid");
+							}
+							if(data.indexOf('inv_for') != -1){
+								$(".marks").siblings("span").css('display','block').html("<ul><li>Please follow the given format: [Subject]|[Marks]</li><li>Subject name can only contain characters</li><li>Marks: range 0-100</li></ul>");
+							}
+							if(data.indexOf('inv_cn') != -1){
+								$(".contact").val("");
+								$(".contact").siblings("span").css('display','block').html("Contact invalid");
+							}
+						}
 					}
-					if(data.indexOf('inv_for') != -1){
-						$(".marks").siblings("span").css('display','block').html("<ul><li>Please follow the given format: [Subject]|[Marks]</li><li>Subject name can only contain characters</li><li>Marks: range 0-100</li></ul>");
-					}
-					if(data.indexOf('inv_cn') != -1){
-						$(".contact").val("");
-						$(".contact").siblings("span").css('display','block').html("Contact invalid");
-					}
-				}
-			}
 		});
 	});
 });

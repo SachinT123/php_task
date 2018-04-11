@@ -3,7 +3,6 @@
 <head>
 	<title>Register</title>
 	<link rel="stylesheet" type="text/css" href="../stylesheets/login.css">
-	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 </head>
 <body>
 	<div class="info_container">
@@ -47,6 +46,7 @@
 		</form>
 	</div>
 
+	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="../js/RegisterForm.js"></script>
 </body>
 </html>

@@ -3,7 +3,6 @@
 <head>
 	<title>User Login</title>
 	<link rel="stylesheet" type="text/css" href="../stylesheets/login.css">
-	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 </head>
 <body>
 	<div class="info_container">
@@ -32,18 +31,16 @@
 
 	<script type="text/javascript" src="../js/RegisterForm.js"></script>
 </body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
 </html>
 
 <?php 
 	session_start();
-	$db_user = "root";
-	$db_pass = "S@chin123";
-	$db_name = "webdata";
-	$conn = new mysqli("localhost",$db_user,$db_pass,$db_name);//db connection
-	if($conn->connect_errno)
-		die("Failed connection : " . $conn->connect_error);
-
-	if(isset($_POST['submit']))
+	
+	include "dbConnect.php";
+	if(isset($_POST['submit']) && $_SESSION['login_instance'] == 0)	
 	{
 		$sql = "select * from userinfo where email = '" . $_POST['email'] . "' && contact = '" . $_POST['contact'] . "'";
 		$query = mysqli_query($conn, $sql);

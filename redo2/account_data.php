@@ -1,13 +1,8 @@
 <?php 
 	session_start();
-	$db_user = "root";
-	$db_pass = "S@chin123";
-	$db_name = "webdata";
-	//initiate mysql connection
-	$conn = new mysqli("localhost",$db_user,$db_pass,$db_name);
-	if($conn->connect_errno)
-		die("Failed connection : " . $conn->connect_error);
 	
+	include "dbConnect.php";
+
 	$valid = array();
 	$fn = $_POST['first_name'];
 	$ln = $_POST['last_name'];
@@ -57,6 +52,7 @@
 			$query = mysqli_query($conn,$sql);
 			//assign session variable to be used later
 			$_SESSION['user_name'] = $_POST['email'];
+			$_SESSION['login_instance'] = 1;
 		}
 		else{
 			array_push($valid, "AR");

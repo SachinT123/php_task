@@ -1,12 +1,8 @@
 <?php
 	session_start();
-	$db_user = "root";
-	$db_pass = "S@chin123";
-	$db_name = "webdata";
-	$conn = new mysqli("localhost",$db_user,$db_pass,$db_name);//database connection
-	if($conn->connect_errno)
-		die("Failed connection : " . $conn->connect_error);
-
+	
+	include "dbConnect.php";
+	
 	//execute sql query & store result object
 	$query = mysqli_query($conn,"select * from userinfo where email = '" . $_SESSION['user_name'] . "'");
  	
@@ -89,5 +85,5 @@
 	$xmlWriter->save("php://output");
 
  	mysqli_close($conn);
-
+ 	session_destroy();
 ?>
