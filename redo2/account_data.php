@@ -52,7 +52,6 @@
 			$query = mysqli_query($conn,$sql);
 			//assign session variable to be used later
 			$_SESSION['user_name'] = $_POST['email'];
-			$_SESSION['login_instance'] = 1;
 		}
 		else{
 			array_push($valid, "AR");

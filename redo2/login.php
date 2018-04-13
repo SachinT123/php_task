@@ -29,10 +29,11 @@
 		</form>
 	</div>
 
-	<script type="text/javascript" src="../js/RegisterForm.js"></script>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../js/RegisterForm.js"></script>
+
 
 </html>
 
@@ -40,14 +41,15 @@
 	session_start();
 	
 	include "dbConnect.php";
-	if(isset($_POST['submit']) && $_SESSION['login_instance'] == 0)	
+	if(isset($_POST['submit']))	
 	{
 		$sql = "select * from userinfo where email = '" . $_POST['email'] . "' && contact = '" . $_POST['contact'] . "'";
 		$query = mysqli_query($conn, $sql);
 		$row = mysqli_fetch_array($query,MYSQLI_ASSOC);
 		if(!empty($row)){
-			$_SESSION['user_name'] = $_POST['email'];
-			header("location:form2.php");
+				$_SESSION['user_name'] = $_POST['email'];
+				$_SESSION['login_instance'] = 1;
+				header("location:form2.php");
 		}
 		else{
 			echo "<script>alert('Invalid username or password');</script>";

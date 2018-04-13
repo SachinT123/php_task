@@ -2,7 +2,7 @@
 	session_start();
 	
 	include "dbConnect.php";
-	
+
 	//execute sql query & store result object
 	$query = mysqli_query($conn,"select * from userinfo where email = '" . $_SESSION['user_name'] . "'");
  	
