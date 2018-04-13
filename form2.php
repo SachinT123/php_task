@@ -10,7 +10,7 @@
 <html>
 <head>
 	<title>User Details</title>
-	<link rel="stylesheet" type="text/css" href="../stylesheets/login.css">
+	<link rel="stylesheet" type="text/css" href="./stylesheets/login.css">
 </head>
 <body>
 	<div class="info_container">
@@ -58,7 +58,7 @@
 	</div>
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="../js/f2.js"></script>
+	<script type="text/javascript" src="./js/f2.js"></script>
 
 </body>
 </html>

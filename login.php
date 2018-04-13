@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>User Login</title>
-	<link rel="stylesheet" type="text/css" href="../stylesheets/login.css">
+	<link rel="stylesheet" type="text/css" href="./stylesheets/login.css">
 </head>
 <body>
 	<div class="info_container">
@@ -32,7 +32,7 @@
 </body>
 
 <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../js/RegisterForm.js"></script>
+<script type="text/javascript" src="./js/RegisterForm.js"></script>
 
 
 </html>
@@ -48,7 +48,6 @@
 		$row = mysqli_fetch_array($query,MYSQLI_ASSOC);
 		if(!empty($row)){
 				$_SESSION['user_name'] = $_POST['email'];
-				$_SESSION['login_instance'] = 1;
 				header("location:form2.php");
 		}
 		else{
