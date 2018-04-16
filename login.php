@@ -18,7 +18,7 @@
 	
 			<fieldset class="data" id="contact">
 				<legend>Contact No.</legend>
-				<input type="text" name="contact" class="info contact" value="+91" pattern="^(\+91)[1-9]\d{9}$" placeholder="Enter phone no." title="10 digit number with '+91' as country code">
+				<input type="text" name="contact" class="info contact" value="+91" maxlength="13" placeholder="Enter phone no." title="10 digit number with '+91' as country code" onblur="checkContact(this.value)">
 				<span class="error_msg"></span>
 			</fieldset>
 	
