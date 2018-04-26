@@ -6,7 +6,6 @@
 </head>
 <body>
 	<div class="info_container">
-
 		<h1 class="title">REGISTER ACCOUNT</h1>
 	
 		<form id="register" method="POST" enctype="multipart/form-data">
